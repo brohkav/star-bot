@@ -23,9 +23,11 @@ class OrderStars(StatesGroup):
 
 @dp.message(Command("start"))
 async def start_cmd(message: types.Message):
-    await message.answer("Добро пожаловать!
+    await message.answer("Добро 
+пожаловать!
 Курс: 1 звезда = 9₸
-Введите количество звёзд, которое хотите купить:")
+Введите количество звёзд, которое 
+хотите купить:")
     await dp.fsm.set_state(message.from_user.id, OrderStars.waiting_for_amount)
 
 @dp.message(StateFilter(OrderStars.waiting_for_amount))
