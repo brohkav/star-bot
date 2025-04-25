@@ -36,11 +36,9 @@ async def handle_amount(message: types.Message, state: FSMContext):
     await message.answer(f"Сумма к оплате: {total}₸ Переведите на Kaspi: {KASPI_INFO} После оплаты отправьте скриншот чека.")
     await state.set_state(OrderStars.waiting_for_screenshot)
 
-@dp.message(StateFilter(OrderStars.waiting_for_screenshot), content_types=['photo'])
+@dp.message(StateFilter(OrderStars.waiting_for_screenshot))
 async def handle_screenshot(message: types.Message, state: FSMContext):
-    # Проверка, что сообщение содержит фото
     if message.photo:
-        # Обновление данных в состоянии с фото
         await state.update_data(screenshot=message.photo[-1].file_id)
         await message.answer("Отправьте ваш @username")
         await state.set_state(OrderStars.waiting_for_username)
