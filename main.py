@@ -45,11 +45,7 @@ async def handle_screenshot(message: types.Message, state: FSMContext):
 @dp.message(StateFilter(OrderStars.waiting_for_username))
 async def handle_username(message: types.Message, state: FSMContext):
     data = await state.get_data()
-    await bot.send_photo(ADMIN_ID, photo=data['screenshot'], caption=(
-        f"Заявка на покупку звёзд
-Количество: {data['amount']}
-Сумма: {data['total']}₸
-Пользователь: {message.text}"
+    await bot.send_photo(ADMIN_ID, photo=data['screenshot'], caption=(f"Заявка на покупку звёзд Количество: {data['amount']} Сумма: {data['total']}₸ Пользователь: {message.text}"
     ))
     await message.answer("Спасибо! Ожидайте подтверждение от администратора.")
     await state.clear()
