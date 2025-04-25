@@ -33,9 +33,7 @@ async def handle_amount(message: types.Message, state: FSMContext):
     amount = int(message.text)
     total = amount * PRICE_PER_STAR
     await state.update_data(amount=amount, total=total)
-    await message.answer(f"Сумма к оплате: {total}₸
-Переведите на Kaspi: {KASPI_INFO}
-После оплаты отправьте скриншот чека.")
+    await message.answer(f"Сумма к оплате: {total}₸ Переведите на Kaspi: {KASPI_INFO} После оплаты отправьте скриншот чека.")
     await state.set_state(OrderStars.waiting_for_screenshot)
 
 @dp.message(StateFilter(OrderStars.waiting_for_screenshot), content_types=types.ContentType.PHOTO)
